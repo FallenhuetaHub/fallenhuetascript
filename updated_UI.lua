@@ -2764,15 +2764,18 @@ end
 return Library
 local function toggleState(active)
     if active then
-        NewToggle.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Зеленый при активации
+        NewToggle.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
     else
-        NewToggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Черный при выключении
+        NewToggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     end
 end
 
 NewToggle.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        data.Flag = not data.Flag -- Переключаем флаг
-        toggleState(data.Flag)
+        if data then  -- Проверка, определена ли переменная
+            data.Flag = not data.Flag
+            toggleState(data.Flag)
+        end
     end
 end)
+
